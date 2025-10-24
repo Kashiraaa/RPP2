@@ -1,0 +1,26 @@
+name: Deploy on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js (если сборка нужна, иначе убрать)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+      
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./ # директория с готовыми файлами (измените по структуре)
+        publish_branch: gh-pages
+        destination_dir: v${{ github.event.release.tag_name }}
