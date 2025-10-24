@@ -21,6 +21,6 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./ # директория с готовыми файлами (измените по структуре)
+        publish_dir: ./RPP2
         publish_branch: gh-pages
         destination_dir: v${{ github.event.release.tag_name }}
